@@ -9,3 +9,5 @@ import Dashboard from './Dashboard'
 test('Display is rendered', ()=>{
     
 })
+
+// - shows the controls and display

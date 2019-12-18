@@ -2,12 +2,9 @@
 
 import React from 'react';
 import {render} from '@testing-library/react'
-import * as jest from '@testing-library/jest-dom'
 
 import Dashboard from './Dashboard'
 
-test('Display is rendered', ()=>{
-    
+test('Display and controls are rendered in dashboard', ()=>{
+    const {getByText} = render(<Dashboard /> )
 })
-
-// - shows the controls and display

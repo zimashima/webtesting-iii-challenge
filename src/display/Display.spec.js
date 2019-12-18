@@ -1,7 +1,9 @@
-// Test away!
+
 import React from 'react'
+
 import {render} from '@testing-library/react'
-import {toBeInTheDocument, toHaveClass} from '@testing-library/jest-dom'
+import '@testing-library/jest-dom/extend-expect'
+
 import Display from './Display'
 
 test('Displayed Rendered Correctly', ()=> {
@@ -18,9 +20,27 @@ test('Displayed Rendered Correctly', ()=> {
 
 })
 
-// displays 'Closed' if the `closed` prop is `true` and 'Open' if otherwise - CHECKED
-// displays 'Locked' if the `locked` prop is `true` and 'Unlocked' if otherwise CHECKED
 
-// - displays if gate is open/closed and if it is locked/unlocked
-// - when `locked` or `closed` use the `red-led` class
-// - when `unlocked` or `open` use the `green-led` class
+
+test('Displayed classes contain "green-led" when "Unlocked" or "Open"', ()=> {
+
+    const {getByText} = render(<Display locked={false} closed={false}/>)
+
+    const displayUnLocked = getByText(/unlocked/i)
+    const displayOpen = getByText(/open/i)
+
+    expect(displayUnLocked.classList.contains('green-led')).toBe(true)
+    expect(displayOpen.classList.contains('green-led')).toBe(true)
+})
+
+test('Display classes contain "red-led" when "Locked" or "Closed"', ()=> {
+
+    const {getByText} = render(<Display locked={true} closed={true}/>)
+
+    const displayLocked = getByText(/locked/i)
+    const displayClosed = getByText(/closed/i)
+
+    expect(displayLocked.classList.contains('red-led')).toBe(true)
+    expect(displayClosed.classList.contains('red-led')).toBe(true)
+})
+

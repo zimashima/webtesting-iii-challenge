@@ -9,16 +9,24 @@ test('Gate are defaults at unlock and open', ()=> {
 })
 
 
-// test('Buttons text changes to reflect the state the door will be in if clicked', ()=>{
-//     const {getByText, rerender} = render(<Dashboard />)
-//     const openButton = getByText(/Close Gate/i)
-//     const lockedGate = getByText(/Lock Gate/i)
-//     fireEvent.click(openButton)
-//     getByText(/Open Gate/i)
-//     fireEvent.click(lockedGate)
-//     getByText(/Unlock Gate/i)
+test('Buttons text changes to reflect the state the door will be in if clicked', ()=>{
+    const {getByText, rerender} = render(<Controls locked={false} closed={false}/>)
+    const buttons = document.querySelectorAll(".toggle-btn")
+
+    expect(buttons).toHaveLength(2);
+
+    const controlLockUnlock = buttons[0];
     
-// })
+    expect(controlLockUnlock.textContent).toBe("Lock Gate")
+    rerender(<Controls locked={true}/>)
+    expect(controlLockUnlock.textContent).toBe("Unlock Gate")
+
+    const controlOpenClose = buttons[1];
+    expect(controlOpenClose.textContent).toBe("Close Gate");
+    rerender(<Controls closed={true}/>)
+    expect(controlOpenClose.textContent).toBe("Open Gate")
+
+})
 
 
 test('Closed button is disabled if the gate is locked', ()=> {
